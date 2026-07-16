@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------------------------------
+   A few plain CSS rules that are easier to write by hand than as
+   Tailwind classes. Everything here is commented so you can find
+   and tweak things without knowing much CSS.
+------------------------------------------------------------------ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0a0a12;
+  color: #eef0ff;
+  font-family: "VT323", monospace;
+  /* Slightly bigger base size because pixel-style fonts read small */
+  font-size: 20px;
+}
+
+/* Thin neon scrollbar so it matches the theme instead of the default grey one */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a12;
+}
+::-webkit-scrollbar-thumb {
+  background: #ff3fb0;
+  border: 2px solid #0a0a12;
+}
+
+/* Text you highlight with the mouse gets the neon treatment too */
+::selection {
+  background: #ff3fb0;
+  color: #0a0a12;
+}
+
+/* "Pixel corners" - cuts little notches out of the corners of a box so
+   square boxes read as retro/8-bit instead of plain rectangles.
+   Used on buttons and panel borders. Apply with className="pixel-corners" */
+.pixel-corners {
+  clip-path: polygon(
+    0 8px, 8px 8px, 8px 0,
+    calc(100% - 8px) 0, calc(100% - 8px) 8px, 100% 8px,
+    100% calc(100% - 8px), calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) 100%,
+    8px 100%, 8px calc(100% - 8px), 0 calc(100% - 8px)
+  );
+}
+
+/* A softer, smaller notch used on buttons */
+.pixel-corners-sm {
+  clip-path: polygon(
+    0 4px, 4px 4px, 4px 0,
+    calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+  );
+}
+
+/* Repeating scanline texture, laid over dark panels for a CRT-screen feel */
+.crt-lines {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.035) 0px,
+    rgba(255, 255, 255, 0.035) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* Keeps focus rings visible for keyboard users, styled to match the theme
+   instead of the browser default blue */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #4ffbea;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
