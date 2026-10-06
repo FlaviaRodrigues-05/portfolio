@@ -53,6 +53,16 @@ export default {
           "0%, 100%": { opacity: 0.2, transform: "scale(0.8)" },
           "50%": { opacity: 1, transform: "scale(1.1)" },
         },
+        // a skill dot "pops" when you collect it
+        pop: {
+          "0%": { transform: "scale(0.4)" },
+          "60%": { transform: "scale(1.5)" },
+          "100%": { transform: "scale(1)" },
+        },
+        toastIn: {
+          "0%": { opacity: 0, transform: "translateY(16px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
       },
       animation: {
         blink: "blink 1.1s steps(1) infinite",
@@ -62,6 +72,8 @@ export default {
         typeLine: "typeLine 3.2s steps(20) infinite",
         scan: "scan 1s linear infinite",
         twinkle: "twinkle 2.5s ease-in-out infinite",
+        pop: "pop 0.35s steps(5) 1",
+        toast: "toastIn 0.25s steps(4) 1",
       },
     },
   },

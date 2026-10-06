@@ -14,18 +14,22 @@ export default function Projects() {
         subtitle="A few things I've built along the way."
       />
 
-      <div className="grid md:grid-cols-2 gap-8">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projects.map((project, index) => (
           <article
             key={project.id}
-            className="group border-2 border-purple bg-panel pixel-corners p-6 sm:p-7 hover:border-cyan transition-colors"
+            className="group flex flex-col border-2 border-purple bg-panel pixel-corners p-6 sm:p-7 hover:border-cyan transition-colors"
           >
             <div className="flex items-center justify-between mb-4">
               <span className="font-pixel text-[9px] text-pink">
                 QUEST {String(index + 1).padStart(2, "0")}
               </span>
-              <span className="font-pixel text-[9px] text-green">
-                ★ COMPLETE
+              <span
+                className={`font-pixel text-[9px] ${
+                  project.status === "NEW" ? "text-pink animate-blink" : "text-green"
+                }`}
+              >
+                ★ {project.status}
               </span>
             </div>
 
@@ -49,20 +53,22 @@ export default function Projects() {
               ))}
             </div>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 mt-auto">
+              {project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-pixel text-[10px] bg-cyan text-ink px-4 py-3 pixel-corners-sm hover:bg-pink transition-colors"
+                className="font-pixel text-[10px] bg-cyan text-ink px-4 py-3 pixel-corners-sm pixel-press hover:bg-pink"
               >
                 VISIT ▸
               </a>
+              )}
               <a
                 href={project.codeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-pixel text-[10px] border-2 border-purple text-ivory px-4 py-3 pixel-corners-sm hover:border-cyan hover:text-cyan transition-colors"
+                className="font-pixel text-[10px] border-2 border-purple text-ivory px-4 py-3 pixel-corners-sm pixel-press hover:border-cyan hover:text-cyan"
               >
                 VIEW CODE
               </a>

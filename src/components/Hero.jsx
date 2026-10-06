@@ -1,5 +1,7 @@
 import React from "react";
 import PixelCharacter from "./PixelCharacter.jsx";
+import Typewriter from "./Typewriter.jsx";
+import Tilt from "./Tilt.jsx";
 import { personalInfo } from "../data.js";
 
 export default function Hero() {
@@ -29,8 +31,12 @@ export default function Hero() {
             {personalInfo.name}
           </h1>
 
-          <p className="font-pixel text-green text-sm sm:text-lg mt-4 drop-shadow-[0_0_10px_rgba(255,63,176,0.4)]">
-            {personalInfo.title}
+          {/* aria-label keeps the real title for screen readers while the words type out */}
+          <p
+            aria-label={personalInfo.title}
+            className="font-pixel text-green text-sm sm:text-lg mt-4 min-h-[3.4em] sm:min-h-[2.4em] leading-relaxed drop-shadow-[0_0_10px_rgba(255,63,176,0.4)]"
+          >
+            <Typewriter words={personalInfo.roles} />
           </p>
 
           <p className="text-muted text-xl sm:text-2xl mt-6 max-w-md">
@@ -40,28 +46,35 @@ export default function Hero() {
           <div className="flex flex-wrap gap-4 mt-8">
             <a
               href="#projects"
-              className="font-pixel text-[11px] bg-pink text-ink px-5 py-3.5 pixel-corners-sm hover:bg-cyan transition-colors"
+              className="font-pixel text-[11px] bg-pink text-ink px-5 py-3.5 pixel-corners-sm pixel-press hover:bg-cyan"
             >
               ▶ START
             </a>
             <a
               href="#contact"
-              className="font-pixel text-[11px] border-2 border-purple text-ivory px-5 py-3.5 pixel-corners-sm hover:border-cyan hover:text-cyan transition-colors"
+              className="font-pixel text-[11px] border-2 border-purple text-ivory px-5 py-3.5 pixel-corners-sm pixel-press hover:border-cyan hover:text-cyan"
             >
               CONTACT ME
+            </a>
+            <a
+              href={personalInfo.resume}
+              download
+              className="font-pixel text-[11px] border-2 border-green text-green px-5 py-3.5 pixel-corners-sm pixel-press hover:bg-green hover:text-ink"
+            >
+              RESUME ↓
             </a>
           </div>
         </div>
 
         {/* Right: the "game screen" containing the animated pixel character */}
-        <div className="relative mx-auto w-full max-w-sm">
+        <Tilt className="relative mx-auto w-full max-w-sm">
           <div className="border-4 border-green pixel-corners bg-panel p-6 sm:p-8 shadow-[0_0_35px_rgba(61,255,160,0.25)] crt-lines">
             <PixelCharacter />
           </div>
           <p className="text-center font-pixel text-[9px] text-muted mt-4">
             LVL 19 · CS STUDENT · MUMBAI
           </p>
-        </div>
+        </Tilt>
       </div>
     </section>
   );

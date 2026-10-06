@@ -1,6 +1,19 @@
 import React from "react";
 import SectionHeader from "./SectionHeader.jsx";
 import { personalInfo } from "../data.js";
+import { burst, toast } from "../lib/effects.js";
+
+// Copies the email address so it can be pasted anywhere
+async function copyEmail(event) {
+  const r = event.currentTarget.getBoundingClientRect();
+  try {
+    await navigator.clipboard.writeText(personalInfo.email);
+    burst(r.left + r.width / 2, r.top + r.height / 2, 14);
+    toast("Email copied to clipboard");
+  } catch {
+    toast("Could not copy. Email: " + personalInfo.email);
+  }
+}
 
 export default function Contact() {
   return (
@@ -43,6 +56,15 @@ export default function Contact() {
             external
           />
         </div>
+
+        <button
+          type="button"
+          data-no-spark
+          onClick={copyEmail}
+          className="mt-8 font-pixel text-[10px] border-2 border-green text-green px-5 py-3.5 pixel-corners-sm pixel-press hover:bg-green hover:text-ink"
+        >
+          COPY EMAIL
+        </button>
       </div>
     </section>
   );
@@ -54,7 +76,7 @@ function ContactLink({ href, label, value, external }) {
       href={href}
       target={external ? "_blank" : undefined}
       rel={external ? "noopener noreferrer" : undefined}
-      className="border-2 border-purple hover:border-cyan bg-panel2 px-5 py-4 pixel-corners-sm transition-colors min-w-[150px]"
+      className="border-2 border-purple hover:border-cyan bg-panel2 px-5 py-4 pixel-corners-sm pixel-press min-w-[150px]"
     >
       <p className="font-pixel text-[9px] text-pink mb-2">{label}</p>
       <p className="text-lg text-ivory break-words">{value}</p>

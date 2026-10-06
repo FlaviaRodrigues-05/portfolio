@@ -7,6 +7,9 @@ export default function Footer() {
       <p className="font-pixel text-[9px] text-muted">
         © {new Date().getFullYear()} {personalInfo.name} · MADE WITH REACT + TAILWIND
       </p>
+      <p className="text-muted/70 text-lg mt-2">
+        Psst... try the Konami code: ↑ ↑ ↓ ↓ ← → ← → B A
+      </p>
     </footer>
   );
 }

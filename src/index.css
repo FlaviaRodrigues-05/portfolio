@@ -71,6 +71,30 @@ body {
   );
 }
 
+/* Pixel sparks thrown by clicks (see lib/effects.js) */
+@keyframes spark {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--dx), var(--dy)) scale(0.3);
+    opacity: 0;
+  }
+}
+
+/* Buttons that lift on hover and "press down" when clicked */
+.pixel-press {
+  transition: transform 90ms steps(2), background-color 150ms, color 150ms,
+    border-color 150ms;
+}
+.pixel-press:hover {
+  transform: translateY(-2px);
+}
+.pixel-press:active {
+  transform: translateY(2px);
+}
+
 /* Keeps focus rings visible for keyboard users, styled to match the theme
    instead of the browser default blue */
 a:focus-visible,
